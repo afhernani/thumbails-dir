@@ -19,6 +19,7 @@ namespace ThumbLib
             InitializeComponent();
             this.AddFilesEvent += AddFilesHandler;
             this.AddThumbsEvent += AddThumbsHandler;
+            this.AddListDiferenceEvent += AddListDiferenceHandler;
         }
 
         public ScanThumb(string path)
@@ -30,10 +31,23 @@ namespace ThumbLib
             AssingPaths(path);
         }
 
+        public void Star()
+        {
+            if (string.IsNullOrEmpty(PathDir)) return;
+            //continuamos
+            MakeLists();
+            Debug.WriteLine($"Creadas las dos listas ...");
+            AnalisisPaths(); //encontramos los ficheros que faltan
+            Debug.WriteLine($"Analisis de directorios");
+            WorkingDatos(); //trabajos los datos.
+            Debug.WriteLine($"Make a gif ...");
+            ThrowProcessMakeGif();
+            Debug.WriteLine($"End process ...");
+        }
         private string PathDir { get; set; } = null;
         private string PathThumb { get; set; } = null;
 
-        private void AssingPaths(string path)
+        public void AssingPaths(string path)
         {
             PathDir = path;
             PathThumb = Path.Combine(path, "Thumbails");
@@ -45,15 +59,65 @@ namespace ThumbLib
             DirectoryInfo dir = new DirectoryInfo(PathThumb);
             dir.Attributes=FileAttributes.Hidden;
             Debug.WriteLine($"Asignado los paths ...");
-            MakeLists();
-            Debug.WriteLine($"Creadas las dos listas ...");
-            AnalisisPaths(); //encontramos los ficheros que faltan
-            Debug.WriteLine($"Analisis de directorios");
-            WorkingDatos(); //trabajos los datos.
-
         }
 
         public bool MakeThumb { get; set; } = false;
+        #region makethumgif
+
+        private int Index { get; set; } = 0;
+
+        private void ThrowProcessMakeGif()
+        {
+            if (Index < ListDiference.Count)
+            {
+                string movfile = GetFileNameFromString(ListDiference[Index]);
+                string file = Path.Combine(PathDir, movfile);
+                int rate = 2;
+                int numframe = 22;
+                try
+                {
+                    VideoFile videofile = Converter.GetVideoInfo(file);
+                    double time = Math.Round(TimeSpan.FromTicks(videofile.Duration.Ticks).TotalSeconds, 0);
+                    int num = (int)time / numframe; //numero de frames no puede ser o. al igual que num
+                    if (num == 0) num = 5;
+                    Converter conv = new Converter();
+                    conv.FrameRate = rate;
+                    conv.MadeFilmGif += MadeGif;
+                    conv.ThreadMakeGif(file, num);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        private void MadeGif(object sender, OutputPackage package)
+        {
+            //this.BeginInvoke(new Converter.MakeFilmGifHandler(Madegifmadeend), new object[] { sender, package });
+            Madegifmadeend(sender, package);
+        }
+
+        private void Madegifmadeend(object sender, OutputPackage package)
+        {
+            //this.progressBar1.Value = Index;
+            //((itemMovie)listView.Items[Index].Tag).Thumbs = (Image)Image.FromStream(package.VideoStream).Clone();
+            //pictureBox1.Image = ((itemMovie)listView.Items[Index].Tag).Thumbs;
+            //listView.Items[Index].SubItems[4].Text = "End";
+            Index++;
+            if (Index < ListDiference.Count)
+            {
+                ThrowProcessMakeGif();
+            }
+            else
+            {
+                //btnAceptar.Enabled = true; //desabilitamos.
+                //btnAbrir.Enabled = true; //desabilita abrir ficheros
+                Debug.WriteLine($"Process terminado ... +++Auto.");
+            }
+        }
+
+        #endregion
         private void WorkingDatos()
         {
             //tenemos la lista de la diferencia.-no sabemos si son
@@ -126,7 +190,7 @@ namespace ThumbLib
 
             var differences = listfilesthumbails.Where(x => ListThumbs.All(x1 => x1 != x))
             .Union(ListThumbs.Where(x => listfilesthumbails.All(x1 => x1 != x))).ToList();
-            if (differences.Count() != 0)
+            if (differences.Count() >= 0)
             {
                 Debug.WriteLine($"differences: {differences.GetType()}");
                 lock(this){ AddListDiferenceEvent?.Invoke((List<string>) differences);}

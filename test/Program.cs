@@ -27,8 +27,9 @@ namespace test
             {
                 System.Console.WriteLine($"args = {args.Length}");
                 System.Console.WriteLine($"valour = {args[0]}");
-                ScanThumb scan = new ScanThumb(args[0]);
-                
+                ScanThumb scan = new ScanThumb();
+                scan.AssingPaths(args[0]);
+                scan.Star();        
             }
             
             //esperamos para salir.
