@@ -53,6 +53,7 @@ namespace ThumbLib
 
         }
 
+        public bool MakeThumb { get; set; } = false;
         private void WorkingDatos()
         {
             //tenemos la lista de la diferencia.-no sabemos si son
@@ -108,7 +109,7 @@ namespace ThumbLib
             
         }
 
-        public string Extc { get; set; } = ".flv|.mp4|.ts|.mkv";
+        public string Extc { get; set; } = ".gif|.flv|.mp4|.ts|.ts|.avi|.mpg|.mpeg|.web|.mkv";
 
         private List<string> TransFilesToNameThumbails()
         {
@@ -127,10 +128,9 @@ namespace ThumbLib
             .Union(ListThumbs.Where(x => listfilesthumbails.All(x1 => x1 != x))).ToList();
             if (differences.Count() != 0)
             {
-                Debug.WriteLine("AnalisisPath ... Different!");
+                Debug.WriteLine($"differences: {differences.GetType()}");
+                lock(this){ AddListDiferenceEvent?.Invoke((List<string>) differences);}
             }
-            Debug.WriteLine($"differences: {differences.GetType()} \ndif: {differences.ToString()}");
-            lock(this){ AddListDiferenceEvent?.Invoke((List<string>) differences);}
         }
 
         delegate void AddArrayFiles(string[] files);
@@ -156,6 +156,7 @@ namespace ThumbLib
         private void AddFiles(string[] files)
         {
             ListFiles=new List<string>();
+            files = files.Where(x => IsExt(Path.GetExtension(x).ToLower())).ToArray();
             ListFiles.AddRange(files);
             OutList(ListFiles);
         }
@@ -168,6 +169,7 @@ namespace ThumbLib
         private void AddThums(string[] thumbs)
         {
             ListThumbs=new List<string>();
+            thumbs = thumbs.Where(x => IsExt(Path.GetExtension(x).ToLower())).ToArray();
             ListThumbs.AddRange(thumbs);
             OutList(ListThumbs);
         }
@@ -194,6 +196,19 @@ namespace ThumbLib
                 Debug.WriteLine($"ELEM: {l}");
             }
             Debug.WriteLine($"--------");
+        }
+
+        private bool IsExt(string ext)
+        {
+            bool comp = false;
+            if (string.IsNullOrEmpty(ext)) return comp;
+            string[] etc = Extc.Split('|');
+            foreach (string item in etc)
+            {
+                comp= ext.ToLower().Equals(item.ToLower());
+                if (comp == true) break;
+            }
+            return comp;
         }
     }
 }
