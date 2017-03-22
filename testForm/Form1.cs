@@ -38,7 +38,6 @@ namespace testForm
         private void BtnTask_Click(object sender, EventArgs e)
         {
             T = Task.Factory.StartNew(Tarea);
-            this.Close();
         }
     }
 }
