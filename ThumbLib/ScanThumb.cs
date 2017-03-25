@@ -143,7 +143,7 @@ namespace ThumbLib
                     string filemov = Path.Combine(PathDir, movfile);
                     if (File.Exists(filemov))
                     {
-                        CommitWork.Add($"{filemov} --> made gif");
+                        CommitWork.Add($"{movfile} --> made gif");
                         Debug.WriteLine($"{filemov} --> Pendiente make gif");
                     }
                 }

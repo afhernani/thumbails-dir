@@ -30,6 +30,7 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.BtnTask = new System.Windows.Forms.Button();
+            this.listBoxTareas = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -42,7 +43,7 @@
             // BtnTask
             // 
             this.BtnTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnTask.Location = new System.Drawing.Point(463, 43);
+            this.BtnTask.Location = new System.Drawing.Point(566, 12);
             this.BtnTask.Name = "BtnTask";
             this.BtnTask.Size = new System.Drawing.Size(97, 28);
             this.BtnTask.TabIndex = 2;
@@ -50,11 +51,20 @@
             this.BtnTask.UseVisualStyleBackColor = true;
             this.BtnTask.Click += new System.EventHandler(this.BtnTask_Click);
             // 
+            // listBoxTareas
+            // 
+            this.listBoxTareas.FormattingEnabled = true;
+            this.listBoxTareas.Location = new System.Drawing.Point(12, 35);
+            this.listBoxTareas.Name = "listBoxTareas";
+            this.listBoxTareas.Size = new System.Drawing.Size(548, 82);
+            this.listBoxTareas.TabIndex = 3;
+            // 
             // ThumbForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 83);
+            this.ClientSize = new System.Drawing.Size(671, 133);
+            this.Controls.Add(this.listBoxTareas);
             this.Controls.Add(this.BtnTask);
             this.Controls.Add(this.textBox1);
             this.Name = "ThumbForm";
@@ -69,6 +79,7 @@
         #endregion
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button BtnTask;
+        private System.Windows.Forms.ListBox listBoxTareas;
     }
 }
 

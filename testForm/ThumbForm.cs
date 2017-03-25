@@ -39,7 +39,9 @@ namespace testForm
 
         private void Endthreadfiles(string[] workfiles, bool tar)
         {
+            listBoxTareas.Items.Clear();
             BtnTask.Enabled = true;
+            listBoxTareas.Items.AddRange(workfiles);
         }
 
         private void BtnTask_Click(object sender, EventArgs e)
