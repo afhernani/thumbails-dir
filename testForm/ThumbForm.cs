@@ -12,9 +12,9 @@ using ThumbLib;
 
 namespace testForm
 {
-    public partial class Form1 : Form
+    public partial class ThumbForm : Form
     {
-        public Form1()
+        public ThumbForm()
         {
             InitializeComponent();
         }
@@ -38,6 +38,17 @@ namespace testForm
         private void BtnTask_Click(object sender, EventArgs e)
         {
             T = Task.Factory.StartNew(Tarea);
+        }
+
+        private void ThumbForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.FileDir = textBox1.Text;
+        }
+
+        private void ThumbForm_Load(object sender, EventArgs e)
+        {
+            string dirwork = Properties.Settings.Default.FileDir;
+            if (!String.IsNullOrEmpty(dirwork)) textBox1.Text = dirwork;
         }
     }
 }

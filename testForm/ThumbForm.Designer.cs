@@ -1,6 +1,6 @@
 ﻿namespace testForm
 {
-    partial class Form1
+    partial class ThumbForm
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(548, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "C:\\Users\\hernani\\Downloads\\Video\\Huge-melons";
             // 
             // BtnTask
             // 
@@ -51,15 +50,17 @@
             this.BtnTask.UseVisualStyleBackColor = true;
             this.BtnTask.Click += new System.EventHandler(this.BtnTask_Click);
             // 
-            // Form1
+            // ThumbForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(572, 83);
             this.Controls.Add(this.BtnTask);
             this.Controls.Add(this.textBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "ThumbForm";
+            this.Text = "Thumbails-Dir";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ThumbForm_FormClosing);
+            this.Load += new System.EventHandler(this.ThumbForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
