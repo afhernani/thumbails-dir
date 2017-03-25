@@ -43,6 +43,7 @@ namespace testForm
         private void ThumbForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.FileDir = textBox1.Text;
+            Properties.Settings.Default.Save();
         }
 
         private void ThumbForm_Load(object sender, EventArgs e)
