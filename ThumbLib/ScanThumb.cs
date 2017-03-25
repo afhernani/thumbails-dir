@@ -43,7 +43,7 @@ namespace ThumbLib
             Debug.WriteLine($"Make a gif ...");
             ThrowProcessMakeGif();
             Debug.WriteLine($"End process ...");
-            OnEndTreadEvent(ListDiference.ToArray(), true);
+            OnEndTreadEvent(CommitWork.ToArray(), true);
         }
 
         private string PathDir { get; set; } = null;
@@ -123,6 +123,7 @@ namespace ThumbLib
         #endregion
         private void WorkingDatos()
         {
+            CommitWork = new List<string>();
             //tenemos la lista de la diferencia.-no sabemos si son
             //ficheros video o gif lo que sobra. 
             //comprobamos si existe el fichero gif, si existe es
@@ -132,6 +133,7 @@ namespace ThumbLib
                 string filegif = Path.Combine(PathThumb, fileName);
                 if (File.Exists(filegif))
                 {
+                    CommitWork.Add($"{filegif} --> delete.");
                     File.Delete(filegif);
                     Debug.WriteLine($"{filegif} --> delete.");
                 }
@@ -141,6 +143,7 @@ namespace ThumbLib
                     string filemov = Path.Combine(PathDir, movfile);
                     if (File.Exists(filemov))
                     {
+                        CommitWork.Add($"{filemov} --> made gif");
                         Debug.WriteLine($"{filemov} --> Pendiente make gif");
                     }
                 }
@@ -158,6 +161,7 @@ namespace ThumbLib
         private List<string> ListFiles { get; set; } = null;
         private List<string> ListThumbs { get; set; } = null;
         private List<string> ListDiference { get; set; } = null;
+        private List<string> CommitWork { get; set; } = null;
 
         private void MakeLists()
         {
