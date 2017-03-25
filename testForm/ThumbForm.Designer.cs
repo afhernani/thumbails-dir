@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThumbForm));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.BtnTask = new System.Windows.Forms.Button();
             this.listBoxTareas = new System.Windows.Forms.ListBox();
@@ -67,6 +68,7 @@
             this.Controls.Add(this.listBoxTareas);
             this.Controls.Add(this.BtnTask);
             this.Controls.Add(this.textBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ThumbForm";
             this.Text = "Thumbails-Dir";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ThumbForm_FormClosing);

@@ -36,18 +36,34 @@ namespace test
                 scan.AssingPaths(args[0]);
                 scan.Star();        
             }
-            
+            while (!Tar)
+            {
+                //nada.
+            }
             //esperamos para salir.
-            System.Console.ReadKey();
+            //System.Console.ReadKey();
         }
 
         private static Task T;
 
+
         static void Tarea(string text)
         {
             ScanThumb scan = new ScanThumb(text);
+            scan.EndThreadEvent += EndThread;
             scan.Star();
             Debug.WriteLine($"Tarea() ==> Finalizada ..");
+        }
+
+        private static bool Tar = false;
+        private static void EndThread(string[] workfiles, bool tar)
+        {
+            foreach (string note in workfiles)
+            {
+                Console.WriteLine(note);
+            }
+            Console.WriteLine($"end");
+            Tar = tar;
         }
     }
 }
