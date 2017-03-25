@@ -43,7 +43,9 @@ namespace ThumbLib
             Debug.WriteLine($"Make a gif ...");
             ThrowProcessMakeGif();
             Debug.WriteLine($"End process ...");
+            OnEndTreadEvent(ListDiference.ToArray(), true);
         }
+
         private string PathDir { get; set; } = null;
         private string PathThumb { get; set; } = null;
 
@@ -72,6 +74,7 @@ namespace ThumbLib
             {
                 string movfile = GetFileNameFromString(ListDiference[Index]);
                 string file = Path.Combine(PathDir, movfile);
+                if (!File.Exists(file)) return;
                 int rate = 2;
                 int numframe = 22;
                 try
@@ -195,6 +198,14 @@ namespace ThumbLib
                 Debug.WriteLine($"differences: {differences.GetType()}");
                 lock(this){ AddListDiferenceEvent?.Invoke((List<string>) differences);}
             }
+        }
+
+        public delegate void EndThreadFile(string[] workfiles, bool tar);
+        public event EndThreadFile EndThreadEvent;
+
+        private void OnEndTreadEvent(string[] worfile, bool tar)
+        {
+            EndThreadEvent?.Invoke(worfile, tar);
         }
 
         delegate void AddArrayFiles(string[] files);

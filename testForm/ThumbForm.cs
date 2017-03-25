@@ -31,15 +31,22 @@ namespace testForm
 
         private void Tarea()
         {
-                ScanThumb scan = new ScanThumb(textBox1.Text);
-                scan.Star();
-                Debug.WriteLine($"Tarea() ==> Finalizada ..");          
+            ScanThumb scan = new ScanThumb(textBox1.Text);
+            scan.EndThreadEvent += Endthreadfiles;
+            scan.Star();
+            Debug.WriteLine($"Tarea() ==> Finalizada ..");          
+        }
+
+        private void Endthreadfiles(string[] workfiles, bool tar)
+        {
+            BtnTask.Enabled = true;
         }
 
         private void BtnTask_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(textBox1.Text))
             {
+                BtnTask.Enabled = false;
                 T = Task.Factory.StartNew(Tarea);
             }
             else
