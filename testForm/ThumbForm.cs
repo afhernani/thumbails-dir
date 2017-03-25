@@ -46,6 +46,7 @@ namespace testForm
 
         private void BtnTask_Click(object sender, EventArgs e)
         {
+            listBoxTareas.Items.Clear();
             if (Directory.Exists(textBox1.Text))
             {
                 BtnTask.Enabled = false;
