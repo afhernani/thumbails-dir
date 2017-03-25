@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,10 @@ namespace test
             {
                 System.Console.WriteLine($"args = {args.Length}");
                 System.Console.WriteLine($"valour = {args[0]}");
+                if (Directory.Exists(args[0]))
+                {
+                    T = Task.Factory.StartNew(()=> Tarea(args[0]));
+                }
                 ScanThumb scan = new ScanThumb();
                 scan.AssingPaths(args[0]);
                 scan.Star();        
@@ -34,6 +39,15 @@ namespace test
             
             //esperamos para salir.
             System.Console.ReadKey();
+        }
+
+        private static Task T;
+
+        static void Tarea(string text)
+        {
+            ScanThumb scan = new ScanThumb(text);
+            scan.Star();
+            Debug.WriteLine($"Tarea() ==> Finalizada ..");
         }
     }
 }

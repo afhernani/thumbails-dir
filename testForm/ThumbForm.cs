@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,14 +31,21 @@ namespace testForm
 
         private void Tarea()
         {
-            ScanThumb scan = new ScanThumb(textBox1.Text);
-            scan.Star();
-            Debug.WriteLine($"Tarea() ==> Finalizada ..");
+                ScanThumb scan = new ScanThumb(textBox1.Text);
+                scan.Star();
+                Debug.WriteLine($"Tarea() ==> Finalizada ..");          
         }
 
         private void BtnTask_Click(object sender, EventArgs e)
         {
-            T = Task.Factory.StartNew(Tarea);
+            if (Directory.Exists(textBox1.Text))
+            {
+                T = Task.Factory.StartNew(Tarea);
+            }
+            else
+            {
+                MessageBox.Show($"No exite del directorio {textBox1.Text}");
+            }
         }
 
         private void ThumbForm_FormClosing(object sender, FormClosingEventArgs e)
