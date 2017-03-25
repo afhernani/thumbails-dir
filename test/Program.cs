@@ -62,7 +62,7 @@ namespace test
             {
                 Console.WriteLine(note);
             }
-            Console.WriteLine($"end");
+            Console.WriteLine($"END WORK");
             Tar = tar;
         }
     }
