@@ -136,8 +136,8 @@ namespace ThumbLib
                 {
                     CommitWork.Add($"{fileName} --> delete.");
                     File.Delete(filegif);
-                    Debug.WriteLine($"{filegif} --> delete.");
-                    OnEndOneThreadEvent(fileName, ListDiference.Count);
+                    Debug.WriteLine($"{fileName} --> delete.");
+                    OnEndOneThreadEvent($"{fileName} --> delete.", ListDiference.Count);
                 }
                 else
                 {
@@ -146,7 +146,7 @@ namespace ThumbLib
                     if (File.Exists(filemov))
                     {
                         CommitWork.Add($"{movfile} --> made gif");
-                        Debug.WriteLine($"{filemov} --> Pendiente make gif");
+                        Debug.WriteLine($"{movfile} --> Pendiente make gif");
                     }
                 }
             }
