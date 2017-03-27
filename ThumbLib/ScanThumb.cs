@@ -134,9 +134,10 @@ namespace ThumbLib
                 string filegif = Path.Combine(PathThumb, fileName);
                 if (File.Exists(filegif))
                 {
-                    CommitWork.Add($"{filegif} --> delete.");
+                    CommitWork.Add($"{fileName} --> delete.");
                     File.Delete(filegif);
                     Debug.WriteLine($"{filegif} --> delete.");
+                    OnEndOneThreadEvent(fileName, ListDiference.Count);
                 }
                 else
                 {

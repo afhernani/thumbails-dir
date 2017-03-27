@@ -30,29 +30,36 @@ namespace testForm
         }
 
         private void Tarea()
-        {
-            ScanThumb scan = new ScanThumb(textBox1.Text);
-            scan.EndThreadEvent += Endthreadfiles;
-            scan.EndOneThreadEvent += EndOneThreadFile;
+        {         
             scan.Star();
             Debug.WriteLine($"Tarea() ==> Finalizada ..");          
         }
 
         private void EndOneThreadFile(string commit, int total)
         {
+            this.BeginInvoke(new ScanThumb.EndOneThread(EndOneThreadHandler), new Object[] { commit, total });    
+        }
+
+        private void EndOneThreadHandler(string commit, int total)
+        {
             listBoxTareas.Items.Add($"{commit}");
             _index++;
-            labelIndex.Text = (total-_index).ToString();
+            labelIndex.Text = (total - _index).ToString();
         }
 
-        
         private int _index = 0;
-        private void Endthreadfiles(string[] workfiles, bool tar)
+        private void EndthreadfileAll(string[] workfiles, bool tar)
         {
-            BtnTask.Enabled = true;
-            listBoxTareas.Items.AddRange(workfiles);   
+            this.BeginInvoke(new ScanThumb.EndThreadFile(EndThreadFileHandler), new Object[] { workfiles,tar });
+               
         }
-
+        private void EndThreadFileHandler(string[] workfiles, bool tar)
+        {
+            listBoxTareas.Items.Clear();
+            BtnTask.Enabled = true;
+            listBoxTareas.Items.AddRange(workfiles);
+        }
+        private ScanThumb scan;
         private void BtnTask_Click(object sender, EventArgs e)
         {
             _index = 0;
@@ -60,6 +67,9 @@ namespace testForm
             if (Directory.Exists(textBox1.Text))
             {
                 BtnTask.Enabled = false;
+                scan = new ScanThumb(textBox1.Text);
+                scan.EndThreadEvent += EndthreadfileAll;
+                scan.EndOneThreadEvent += EndOneThreadFile;
                 T = Task.Factory.StartNew(Tarea);
             }
             else
