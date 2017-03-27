@@ -11,6 +11,7 @@ namespace test
 {
     class Program
     {
+        private static ScanThumb scan;
         /// <summary>
         /// multi tarea con ventanas windows
         /// </summary>
@@ -30,11 +31,11 @@ namespace test
                 System.Console.WriteLine($"valour = {args[0]}");
                 if (Directory.Exists(args[0]))
                 {
+                    scan = new ScanThumb(args[0]);
+                    scan.EndThreadEvent += EndThread;
+                    scan.EndOneThreadEvent += EndOne;
                     T = Task.Factory.StartNew(()=> Tarea(args[0]));
-                }
-                ScanThumb scan = new ScanThumb();
-                scan.AssingPaths(args[0]);
-                scan.Star();        
+                }    
             }
             while (!Tar)
             {
@@ -44,18 +45,23 @@ namespace test
             //System.Console.ReadKey();
         }
 
+        private static void EndOne(string commit, int total)
+        {
+            Console.WriteLine($"{commit}");
+        }
+
         private static Task T;
 
 
         static void Tarea(string text)
         {
-            ScanThumb scan = new ScanThumb(text);
-            scan.EndThreadEvent += EndThread;
+            
             scan.Star();
             Debug.WriteLine($"Tarea() ==> Finalizada ..");
         }
 
         private static bool Tar = false;
+
         private static void EndThread(string[] workfiles, bool tar)
         {
             foreach (string note in workfiles)
