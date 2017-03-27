@@ -64,6 +64,7 @@ namespace test
 
         private static void EndThread(string[] workfiles, bool tar)
         {
+            Console.WriteLine($"\n\n+++++ RES ++++++");
             foreach (string note in workfiles)
             {
                 Console.WriteLine(note);
