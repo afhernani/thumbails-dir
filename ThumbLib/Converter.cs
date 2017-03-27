@@ -23,34 +23,11 @@ namespace ThumbLib
     public class Converter
     {
         #region Properties
-        private static string _ffExe="ffmpeg.exe";
-        public static string ffExe
-        {
-            get
-            {
-                return _ffExe;
-            }
-            set
-            {
-                _ffExe = value;
-            }
-        }
 
-        private string _WorkingPath;
-        private int d;
-
-        public string WorkingPath
-        {
-            get
-            {
-                return _WorkingPath;
-            }
-            set
-            {
-                _WorkingPath = value;
-            }
-        }
-
+        private static string FFExe { get; set; } = "ffmpeg.exe"; 
+        
+        private string WorkingPath { get; set; }
+        
         public int FrameRate { get; set; } = 1;
 
         #endregion
@@ -62,7 +39,7 @@ namespace ThumbLib
         }
         public Converter(string ffmpegExePath)
         {
-            _ffExe = ffmpegExePath;
+            FFExe = ffmpegExePath;
             Initialize();
         }
         #endregion
@@ -80,29 +57,29 @@ namespace ThumbLib
                 {
                     string cadena = Path.Combine(item, "ffmpeg.exe");
                     if (File.Exists(cadena))
-                        ffExe = cadena;
+                        FFExe = cadena;
                 }
-                if (String.IsNullOrEmpty(ffExe))
-                    ffExe = Path.Combine(WorkingPath, "ffmpeg.exe");
+                if (String.IsNullOrEmpty(FFExe))
+                    FFExe = Path.Combine(WorkingPath, "ffmpeg.exe");
             }
             else
             {
-                ffExe = ffExe = Path.Combine(WorkingPath, "ffmpeg.exe");
+                FFExe = FFExe = Path.Combine(WorkingPath, "ffmpeg.exe");
             }
         }
 
         private string GetWorkingFile()
         {
             //try the stated directory
-            if (File.Exists(_ffExe))
+            if (File.Exists(FFExe))
             {
-                return _ffExe;
+                return FFExe;
             }
 
             //oops, that didn't work, try the base directory
-            if (File.Exists(Path.GetFileName(_ffExe)))
+            if (File.Exists(Path.GetFileName(FFExe)))
             {
-                return Path.GetFileName(_ffExe);
+                return Path.GetFileName(FFExe);
             }
 
             //well, now we are really unlucky, let's just return null
@@ -149,7 +126,7 @@ namespace ThumbLib
         private static string RunProcess(string Parameters)
         {
             //create a process info
-            string ffexe = $"\"{ffExe}\"";
+            string ffexe = $"\"{FFExe}\"";
             ProcessStartInfo oInfo = new ProcessStartInfo(ffexe, Parameters);
             oInfo.UseShellExecute = false;
             oInfo.CreateNoWindow = true;
@@ -465,7 +442,7 @@ namespace ThumbLib
             //ou.RawOutput = output;
             ////
             //create a process info
-            string ffexe = $"\"{ffExe}\"";
+            string ffexe = $"\"{FFExe}\"";
             ProcessStartInfo oInfo = new ProcessStartInfo(ffexe, Params);
             oInfo.UseShellExecute = false;
             oInfo.CreateNoWindow = true;
@@ -657,7 +634,7 @@ namespace ThumbLib
             //ou.RawOutput = output;
             ////
             //create a process info
-            string ffexe = $"\"{ffExe}\"";
+            string ffexe = $"\"{FFExe}\"";
             ProcessStartInfo oInfo = new ProcessStartInfo(ffexe, Params);
             oInfo.UseShellExecute = false;
             oInfo.CreateNoWindow = true;
@@ -824,7 +801,7 @@ namespace ThumbLib
             //ou.RawOutput = output;
             ////
             //create a process info
-            string ffexe = $"\"{ffExe}\"";
+            string ffexe = $"\"{FFExe}\"";
             ProcessStartInfo oInfo = new ProcessStartInfo(ffexe, Params);
             oInfo.UseShellExecute = false;
             oInfo.CreateNoWindow = true;
