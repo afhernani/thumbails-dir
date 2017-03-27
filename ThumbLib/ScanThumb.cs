@@ -43,7 +43,7 @@ namespace ThumbLib
             Debug.WriteLine($"Make a gif ...");
             ThrowProcessMakeGif();
             Debug.WriteLine($"End process ...");
-            OnEndTreadEvent(CommitWork.ToArray(), true);
+            OnEndThreadEvent(CommitWork.ToArray(), true);
         }
 
         private string PathDir { get; set; } = null;
@@ -107,6 +107,7 @@ namespace ThumbLib
             //((itemMovie)listView.Items[Index].Tag).Thumbs = (Image)Image.FromStream(package.VideoStream).Clone();
             //pictureBox1.Image = ((itemMovie)listView.Items[Index].Tag).Thumbs;
             //listView.Items[Index].SubItems[4].Text = "End";
+            OnEndOneThreadEvent(ListDiference[Index],ListDiference.Count);
             Index++;
             if (Index < ListDiference.Count)
             {
@@ -207,11 +208,19 @@ namespace ThumbLib
         public delegate void EndThreadFile(string[] workfiles, bool tar);
         public event EndThreadFile EndThreadEvent;
 
-        private void OnEndTreadEvent(string[] worfile, bool tar)
+        private void OnEndThreadEvent(string[] worfile, bool tar)
         {
             EndThreadEvent?.Invoke(worfile, tar);
         }
 
+        public delegate void EndOneThread(string commit, int total);
+
+        public event EndOneThread EndOneThreadEvent;
+
+        private void OnEndOneThreadEvent(string commit, int total)
+        {
+            EndOneThreadEvent?.Invoke(commit, total);
+        }
         delegate void AddArrayFiles(string[] files);
         private event AddArrayFiles AddFilesEvent;
         delegate void AddArrayThumbs(string[] thumbs);

@@ -32,6 +32,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.BtnTask = new System.Windows.Forms.Button();
             this.listBoxTareas = new System.Windows.Forms.ListBox();
+            this.labeltex = new System.Windows.Forms.Label();
+            this.labelIndex = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox1
@@ -60,11 +62,33 @@
             this.listBoxTareas.Size = new System.Drawing.Size(548, 82);
             this.listBoxTareas.TabIndex = 3;
             // 
+            // labeltex
+            // 
+            this.labeltex.AutoSize = true;
+            this.labeltex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labeltex.Location = new System.Drawing.Point(570, 52);
+            this.labeltex.Name = "labeltex";
+            this.labeltex.Size = new System.Drawing.Size(55, 16);
+            this.labeltex.TabIndex = 4;
+            this.labeltex.Text = "Tareas:";
+            // 
+            // labelIndex
+            // 
+            this.labelIndex.AutoSize = true;
+            this.labelIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelIndex.Location = new System.Drawing.Point(600, 79);
+            this.labelIndex.Name = "labelIndex";
+            this.labelIndex.Size = new System.Drawing.Size(40, 24);
+            this.labelIndex.TabIndex = 5;
+            this.labelIndex.Text = "000";
+            // 
             // ThumbForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 133);
+            this.Controls.Add(this.labelIndex);
+            this.Controls.Add(this.labeltex);
             this.Controls.Add(this.listBoxTareas);
             this.Controls.Add(this.BtnTask);
             this.Controls.Add(this.textBox1);
@@ -82,6 +106,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button BtnTask;
         private System.Windows.Forms.ListBox listBoxTareas;
+        private System.Windows.Forms.Label labeltex;
+        private System.Windows.Forms.Label labelIndex;
     }
 }
 

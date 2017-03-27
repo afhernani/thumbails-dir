@@ -33,15 +33,25 @@ namespace testForm
         {
             ScanThumb scan = new ScanThumb(textBox1.Text);
             scan.EndThreadEvent += Endthreadfiles;
+            scan.EndOneThreadEvent += EndOneThreadFile;
             scan.Star();
             Debug.WriteLine($"Tarea() ==> Finalizada ..");          
         }
 
+        private void EndOneThreadFile(string commit, int total)
+        {
+            listBoxTareas.Items.Add($"{commit}");
+            _index++;
+            labelIndex.Text = (total-_index).ToString();
+        }
+
+        
+        private int _index = 0;
         private void Endthreadfiles(string[] workfiles, bool tar)
         {
-            listBoxTareas.Items.Clear();
             BtnTask.Enabled = true;
             listBoxTareas.Items.AddRange(workfiles);
+            _index = 0;
         }
 
         private void BtnTask_Click(object sender, EventArgs e)
