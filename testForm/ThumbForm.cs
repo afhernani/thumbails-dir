@@ -50,12 +50,12 @@ namespace testForm
         private void Endthreadfiles(string[] workfiles, bool tar)
         {
             BtnTask.Enabled = true;
-            listBoxTareas.Items.AddRange(workfiles);
-            _index = 0;
+            listBoxTareas.Items.AddRange(workfiles);   
         }
 
         private void BtnTask_Click(object sender, EventArgs e)
         {
+            _index = 0;
             listBoxTareas.Items.Clear();
             if (Directory.Exists(textBox1.Text))
             {
