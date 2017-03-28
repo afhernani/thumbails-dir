@@ -27,7 +27,7 @@ namespace testFound
             if (args.Length == 2)
             {
                 System.Console.WriteLine($"Argumentos pasados :=> {args.Length}");
-                System.Console.WriteLine($"DirectoryInfo :=> {args[0]} \n FileInfo :=> {args[1]}");
+                System.Console.WriteLine($"DirectoryInfo :=> {args[0]} \nFileInfo :=> {args[1]}");
                 if (Directory.Exists(args[0]) && !String.IsNullOrEmpty(args[1]))
                 {
                     Founder found = new Founder();

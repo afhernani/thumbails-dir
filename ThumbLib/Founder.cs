@@ -57,12 +57,26 @@ namespace ThumbLib
         /// este delegado define como se obtiene los subdirectorios.
         /// </summary>
         readonly getChilds<DirectoryInfo> getChildDirectorys = (DirectoryInfo D)=> D.GetDirectories();
-
+        /// <summary>
+        /// busca recursiva un fichero en todos los directorios a ver
+        /// si se repite.
+        /// </summary>
+        /// <param name="Dir"></param>
+        /// <param name="file"></param>
         public void SearchFileinDirectory(DirectoryInfo Dir, FileInfo file)
         {
             foreach (DirectoryInfo element in FindRescursive<DirectoryInfo>(Dir, getChildDirectorys, LookForDirectory))
             {
-                Debug.WriteLine(element.Name);
+                Console.WriteLine(element.Name);
+                Debug.WriteLine(element.Name);               
+                foreach (FileInfo item in element.GetFiles())
+                {
+                    if (item.Name.Equals(file.Name))
+                    {
+                        Console.WriteLine($"found in directory:{element.Name} fichero: {item.FullName}");
+                        Debug.WriteLine($"found in directory:{element.Name} fichero: {item.FullName}");
+                    }
+                }
             }
         }
     }
