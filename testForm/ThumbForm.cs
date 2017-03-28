@@ -89,5 +89,15 @@ namespace testForm
             string dirwork = Properties.Settings.Default.FileDir;
             if (!String.IsNullOrEmpty(dirwork)) textBox1.Text = dirwork;
         }
+        /// <summary>
+        /// lanza formulario buscar.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Buscar busca = new Buscar();
+            busca.Show();
+        }
     }
 }
