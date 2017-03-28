@@ -58,11 +58,11 @@ namespace ThumbLib
         /// </summary>
         readonly getChilds<DirectoryInfo> getChildDirectorys = (DirectoryInfo D)=> D.GetDirectories();
         /// <summary>
-        /// busca recursiva un fichero en todos los directorios a ver
-        /// si se repite.
+        /// busca recursiva un fichero en el directorio y subdirectorios pasado
+        /// devuelve cauantas veces se repite, si se repite.
         /// </summary>
-        /// <param name="Dir"></param>
-        /// <param name="file"></param>
+        /// <param name="Dir">directorio donde buscar</param>
+        /// <param name="file">nombre del fichero a buscar</param>
         public void SearchFileinDirectory(DirectoryInfo Dir, FileInfo file)
         {
             foreach (DirectoryInfo element in FindRescursive<DirectoryInfo>(Dir, getChildDirectorys, LookForDirectory))
@@ -79,5 +79,27 @@ namespace ThumbLib
                 }
             }
         }
+        /// <summary>
+        /// devuelve un array string de los nombres de ficheros
+        /// contenidos en el directorio pasado.
+        /// -devuelve null si no existe nada.
+        /// </summary>
+        /// <param name="dir">directorio a extraer la lista de ficheros</param>
+        /// <returns></returns>
+        public static string[] ArrayFilesFromDirectory(string dir)
+        {
+            if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
+            {
+                string[] files = Directory.GetFiles(dir, "*.*");
+                string[] filesNames = new string[files.Length];
+                for (int i = 0; i < files.Length; i++)
+                {
+                    filesNames[i] = Path.GetFileName(files[i]);
+                }
+                return filesNames;
+            }
+            return null;
+        }
+
     }
 }
