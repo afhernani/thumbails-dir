@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Buscar));
-            this.textBoxDir = new System.Windows.Forms.TextBox();
-            this.textBoxDir2 = new System.Windows.Forms.TextBox();
+            this.textBoxWhat = new System.Windows.Forms.TextBox();
+            this.textBoxWhere = new System.Windows.Forms.TextBox();
             this.BtnAction = new System.Windows.Forms.Button();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
@@ -38,21 +38,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBoxDir
+            // textBoxWhat
             // 
-            this.textBoxDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDir.Location = new System.Drawing.Point(71, 12);
-            this.textBoxDir.Name = "textBoxDir";
-            this.textBoxDir.Size = new System.Drawing.Size(450, 22);
-            this.textBoxDir.TabIndex = 0;
+            this.textBoxWhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxWhat.Location = new System.Drawing.Point(71, 12);
+            this.textBoxWhat.Name = "textBoxWhat";
+            this.textBoxWhat.Size = new System.Drawing.Size(450, 22);
+            this.textBoxWhat.TabIndex = 0;
             // 
-            // textBoxDir2
+            // textBoxWhere
             // 
-            this.textBoxDir2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDir2.Location = new System.Drawing.Point(71, 40);
-            this.textBoxDir2.Name = "textBoxDir2";
-            this.textBoxDir2.Size = new System.Drawing.Size(450, 22);
-            this.textBoxDir2.TabIndex = 1;
+            this.textBoxWhere.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxWhere.Location = new System.Drawing.Point(71, 40);
+            this.textBoxWhere.Name = "textBoxWhere";
+            this.textBoxWhere.Size = new System.Drawing.Size(450, 22);
+            this.textBoxWhere.TabIndex = 1;
             // 
             // BtnAction
             // 
@@ -118,8 +118,8 @@
             this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.BtnAction);
-            this.Controls.Add(this.textBoxDir2);
-            this.Controls.Add(this.textBoxDir);
+            this.Controls.Add(this.textBoxWhere);
+            this.Controls.Add(this.textBoxWhat);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Buscar";
             this.Text = "Buscar";
@@ -130,8 +130,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxDir;
-        private System.Windows.Forms.TextBox textBoxDir2;
+        private System.Windows.Forms.TextBox textBoxWhat;
+        private System.Windows.Forms.TextBox textBoxWhere;
         private System.Windows.Forms.Button BtnAction;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RichTextBox richTextBox;
