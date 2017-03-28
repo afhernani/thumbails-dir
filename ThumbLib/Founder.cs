@@ -67,13 +67,14 @@ namespace ThumbLib
         {
             foreach (DirectoryInfo element in FindRescursive<DirectoryInfo>(Dir, getChildDirectorys, LookForDirectory))
             {
-                Console.WriteLine(element.Name);
+                //Console.WriteLine(element.Name);
                 Debug.WriteLine(element.Name);               
                 foreach (FileInfo item in element.GetFiles())
                 {
                     if (item.Name.Equals(file.Name))
                     {
-                        Console.WriteLine($"found in directory:{element.Name} fichero: {item.FullName}");
+                        OnFileFounderHandler(item);
+                        //Console.WriteLine($"found in directory:{element.Name} fichero: {item.FullName}");
                         Debug.WriteLine($"found in directory:{element.Name} fichero: {item.FullName}");
                     }
                 }
@@ -100,6 +101,11 @@ namespace ThumbLib
             }
             return null;
         }
-
+        public delegate void FileFounder(FileInfo file);
+        public event FileFounder FileFounderEvent;
+        private void OnFileFounderHandler(FileInfo file)
+        {
+            FileFounderEvent?.Invoke(file);
+        }
     }
 }
