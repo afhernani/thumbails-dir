@@ -12,6 +12,7 @@ namespace ThumbLib
 {
     public partial class Founder : Component
     {
+        public List<string> FilesNotFound { get; set; } = new List<string>();
         public Founder()
         {
             InitializeComponent();
@@ -65,6 +66,7 @@ namespace ThumbLib
         /// <param name="file">nombre del fichero a buscar</param>
         public void SearchFileinDirectory(DirectoryInfo Dir, FileInfo file)
         {
+            bool encontrado = false;
             foreach (DirectoryInfo element in FindRescursive<DirectoryInfo>(Dir, getChildDirectorys, LookForDirectory))
             {
                 //Console.WriteLine(element.Name);
@@ -73,11 +75,18 @@ namespace ThumbLib
                 {
                     if (item.Name.Equals(file.Name))
                     {
+                        encontrado = true;
                         OnFileFounderHandler(item);
                         //Console.WriteLine($"found in directory:{element.Name} fichero: {item.FullName}");
                         Debug.WriteLine($"found in directory:{element.Name} fichero: {item.FullName}");
                     }
                 }
+            }
+            if (encontrado)
+            {
+                //no fue encontrado.
+                FilesNotFound.Add(file.FullName);
+
             }
             OnFileFounderHandler(null);//simepre que termina la busqueda
         }
