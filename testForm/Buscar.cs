@@ -34,6 +34,7 @@ namespace testForm
         }
         private void WorkingHard()
         {
+            foun.FilesNotFound.Clear();
             string what = textBoxWhat.Text;
             string where = textBoxWhere.Text;
             if (string.IsNullOrEmpty(what) && string.IsNullOrWhiteSpace(what)) return;
