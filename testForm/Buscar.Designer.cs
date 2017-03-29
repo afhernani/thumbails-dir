@@ -36,6 +36,8 @@
             this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.CopyTo = new System.Windows.Forms.Button();
+            this.whereCopy = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxWhat
@@ -117,11 +119,33 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Where:";
             // 
+            // CopyTo
+            // 
+            this.CopyTo.Location = new System.Drawing.Point(315, 290);
+            this.CopyTo.Name = "CopyTo";
+            this.CopyTo.Size = new System.Drawing.Size(102, 22);
+            this.CopyTo.TabIndex = 8;
+            this.CopyTo.Text = "Copy To ...";
+            this.CopyTo.UseVisualStyleBackColor = true;
+            this.CopyTo.Click += new System.EventHandler(this.CopyTo_Click);
+            // 
+            // whereCopy
+            // 
+            this.whereCopy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.whereCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.whereCopy.Location = new System.Drawing.Point(91, 290);
+            this.whereCopy.Name = "whereCopy";
+            this.whereCopy.Size = new System.Drawing.Size(218, 22);
+            this.whereCopy.TabIndex = 9;
+            // 
             // Buscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 322);
+            this.Controls.Add(this.whereCopy);
+            this.Controls.Add(this.CopyTo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox);
@@ -147,5 +171,7 @@
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button CopyTo;
+        private System.Windows.Forms.TextBox whereCopy;
     }
 }

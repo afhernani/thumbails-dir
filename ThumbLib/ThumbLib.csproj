@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter.cs" />
+    <Compile Include="FileLibrary.cs" />
     <Compile Include="Founder.cs">
       <SubType>Component</SubType>
     </Compile>

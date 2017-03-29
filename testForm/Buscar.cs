@@ -86,5 +86,30 @@ namespace testForm
                 richTextBox.AppendText("End\n");
             }
         }
+
+        private void CopyTo_Click(object sender, EventArgs e)
+        {
+            string wheretocopy = whereCopy.Text;
+            if (string.IsNullOrEmpty(wheretocopy) && string.IsNullOrWhiteSpace(wheretocopy)) return;
+            string whatdir = textBoxWhat.Text;
+            if (string.IsNullOrEmpty(wheretocopy) && string.IsNullOrWhiteSpace(wheretocopy)) return;
+            if (Directory.Exists(whatdir))
+            {
+                foreach (var item in foun.FilesNotFound)
+                {
+                    string file = Path.Combine(whatdir, item);
+                    if (File.Exists(file))
+                    {
+                        if (Directory.Exists(wheretocopy))
+                        {
+                            string fileto = Path.Combine(wheretocopy, item);
+                            FileLibrary.CopyFile(file, fileto, true);
+                            richTextBox.AppendText($"{item}\ncopy to  {fileto}\n");
+                        }
+                    }
+
+                }
+            }
+        }
     }
 }
