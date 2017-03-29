@@ -82,10 +82,10 @@ namespace ThumbLib
                     }
                 }
             }
-            if (encontrado)
+            if (!encontrado)
             {
                 //no fue encontrado.
-                FilesNotFound.Add(file.FullName);
+                FilesNotFound.Add(file.Name);
 
             }
             OnFileFounderHandler(null);//simepre que termina la busqueda

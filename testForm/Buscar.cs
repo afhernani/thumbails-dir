@@ -43,7 +43,7 @@ namespace testForm
                 //busqueda comparativa de cada fichero en el directorio
                 //con respecto al otro directorio.
                 string[] lista = Founder.ArrayFilesFromDirectory(what);
-                //StringBuilder build = new StringBuilder();
+                StringBuilder build = new StringBuilder();
                 foreach (var item in lista)
                 {
                     richTextBox.AppendText(item + "\n");
@@ -51,10 +51,15 @@ namespace testForm
                     {
                         foun.SearchFileinDirectory(new DirectoryInfo(where), new FileInfo(item));
                     }
-                    //build.Append(item).Append("\n");
                 }
-                //richTextBox.AppendText(build.ToString());
-            }else //es una cadena
+                richTextBox.AppendText("\nFiles not Found:\n");
+                foreach (var item in foun.FilesNotFound)
+                {
+                    build.Append(item).Append("\n");
+                }
+                richTextBox.AppendText(build.ToString());
+            }
+            else //es una cadena
             {
                 if (Directory.Exists(where))
                 {
