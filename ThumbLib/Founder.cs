@@ -79,6 +79,7 @@ namespace ThumbLib
                     }
                 }
             }
+            OnFileFounderHandler(null);
         }
         /// <summary>
         /// devuelve un array string de los nombres de ficheros

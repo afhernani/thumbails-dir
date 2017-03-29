@@ -43,10 +43,41 @@ namespace testForm
                 //busqueda comparativa de cada fichero en el directorio
                 //con respecto al otro directorio.
                 string[] lista = Founder.ArrayFilesFromDirectory(what);
+                //StringBuilder build = new StringBuilder();
                 foreach (var item in lista)
                 {
-                    richTextBox.AppendText(item);
+                    richTextBox.AppendText(item + "\n");
+                    if (Directory.Exists(where))
+                    {
+                        foun.SearchFileinDirectory(new DirectoryInfo(where), new FileInfo(item));
+                    }
+                    //build.Append(item).Append("\n");
                 }
+                //richTextBox.AppendText(build.ToString());
+            }else //es una cadena
+            {
+                if (Directory.Exists(where))
+                {
+                    foun.SearchFileinDirectory(new DirectoryInfo(where), new FileInfo(what));
+                }
+            }
+        }
+        Founder foun = new Founder();
+
+        private void Buscar_Load(object sender, EventArgs e)
+        {
+            foun.FileFounderEvent += FileLocalizado;
+        }
+
+        private void FileLocalizado(FileInfo file)
+        {
+            if(file != null)
+            {
+                richTextBox.AppendText(file.FullName.ToString()+"\n");
+                //if (Path.GetFullPath(file.FullName) == null) Console.WriteLine(file.FullName.ToString());
+            }else
+            {
+                richTextBox.AppendText("End\n");
             }
         }
     }
