@@ -53,6 +53,7 @@ namespace testForm
                     }
                 }
                 richTextBox.AppendText("\nFiles not Found:\n");
+                build.Append(foun.FilesNotFound.Count).Append("\n");
                 foreach (var item in foun.FilesNotFound)
                 {
                     build.Append(item).Append("\n");
