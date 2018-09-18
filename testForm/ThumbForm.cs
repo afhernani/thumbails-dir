@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using ThumbLib;
 
 namespace testForm
@@ -82,6 +83,12 @@ namespace testForm
         {
             Properties.Settings.Default.FileDir = textBox1.Text;
             Properties.Settings.Default.Save();
+            foreach (Process proceso in Process.GetProcesses())
+            {
+                Debug.WriteLine($"Proceso : {proceso.ProcessName}");
+                if (proceso.ProcessName == "ffmpeg")
+                    proceso.Kill();
+            }
         }
 
         private void ThumbForm_Load(object sender, EventArgs e)
